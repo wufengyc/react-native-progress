@@ -16,7 +16,7 @@ import {
 import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
-import { CircularProgress } from 'react-native-wf-progress';
+import { CircularProgress, Dial } from 'react-native-wf-progress';
 
 const App: () => React$Node = () => {
   return (
@@ -57,13 +57,24 @@ const App: () => React$Node = () => {
             indicatorRadius={3}
             strokeColor={{ background: 'skyblue', foreground: ['#FFFFFF', '#000000'] }}>
         </CircularProgress>
+        <Dial
+            style={styles.dial}
+            width={300}
+            progress={70}
+        />
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   scrollView: {
+    flex: 1,
     backgroundColor: Colors.lighter,
+  },
+  dial: {
+    backgroundColor: 'black',
+    alignSelf: 'center',
+    marginVertical: 15,
   },
 });
 

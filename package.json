@@ -1,6 +1,6 @@
 {
   "name": "react-native-wf-progress",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "ReactNative进度条组件，圆形、条形......",
   "main": "index.js",
   "scripts": {

@@ -2,14 +2,13 @@
 # react-native-progress
 ReactNative进度组件：圆形、条形......，带动画。
 
-<img src="https://github.com/wufengyc/react-native-progress/blob/master/example/1.jpg" height=400 />
-
 ## Getting started
 
 `$ npm install react-native-wf-progress --save`
 
 
 ## Usage
+<img src="https://github.com/wufengyc/react-native-progress/blob/master/example/1.jpg" height=400 />
 ```javascript
 import { CircularProgress } from 'react-native-wf-progress';
 
@@ -26,7 +25,19 @@ import { CircularProgress } from 'react-native-wf-progress';
 </CircularProgress>
 ```
 
-## Props
+<img src="https://github.com/wufengyc/react-native-progress/blob/master/example/2.jpg" height=400 />
+```javascript
+import { Dial } from 'react-native-wf-progress';
+
+<Dial
+  style={styles.dial}
+  width={300}
+  progress={70}
+/>
+```
+
+
+## Props CircularProgress
 <table>
   <tr>
     <th>props</th>
@@ -98,3 +109,31 @@ import { CircularProgress } from 'react-native-wf-progress';
   </tr>
 </table>
 
+## Props Dial
+目前Dial暂不支持更多的属性，比如进度条颜色，后面会加上。
+<table>
+  <tr>
+    <th>props</th>
+    <th>备注</th>
+    <th width=250>type</th>
+    <th>是否必须</th>
+  </tr>
+  <tr>
+    <td>style</td>
+    <td>样式</td>
+    <td>ViewPropTypes.style</td>
+    <td>非必须</td>
+  </tr>
+  <tr>
+    <td>width</td>
+    <td>控件宽。会根据width自动计算出相应尺寸</td>
+    <td>number</td>
+    <td>必须</td>
+  </tr>
+  <tr>
+    <td>progress</td>
+    <td>进度</td>
+    <td>number，0-100范围</td>
+    <td>非必须</td>
+  </tr>
+</table>

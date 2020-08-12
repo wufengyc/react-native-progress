@@ -1,0 +1,86 @@
+import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
+import { Path } from 'react-native-svg';
+import {
+  STROKE_WIDTH,
+} from './constant';
+
+
+export default class ArcPath extends PureComponent {
+    static propTypes = {
+      progress: PropTypes.number,
+      x: PropTypes.number,
+      y: PropTypes.number,
+      radius: PropTypes.number,
+    };
+
+    constructor(props) {
+      super(props);
+      this.state = {
+      };
+    }
+
+    componentDidMount() {
+    }
+
+    /**
+     * 画圆形进度
+     * @param {*} x 圆心x轴坐标
+     * @param {*} y 圆心y轴坐标
+     * @param {*} radius 半径
+     * @param {*} progress 进度
+     */
+    drawArc(x, y, radius, progress) {
+      // （求半圆起点的坐标和终点的坐标）已知圆心，半径，角度，求圆上的点坐标
+      const startX = x + radius * Math.cos(170 / 180.0 * Math.PI);
+      const startY = y + radius * Math.sin(170 / 180.0 * Math.PI);
+      const cX = x + radius * Math.cos(270 / 180.0 * Math.PI);
+      const cY = y + radius * Math.sin(270 / 180.0 * Math.PI);
+      const endX = x + radius * Math.cos(10 / 180.0 * Math.PI);
+      const endY = y + radius * Math.sin(10 / 180.0 * Math.PI);
+
+      // const highlightPath = Path().moveTo(startX, startY);
+      let highlightPath = `M${startX} ${startY}`;
+      // 通过进度，画出高亮的部分
+      if (progress === 100) {
+        // highlightPath.arcTo(cX, cY, radius).arcTo(endX, endY, radius);
+        highlightPath += `A${radius} ${radius} 0 0 1 ${cX} ${cY} A${radius} ${radius} 0 0 1 ${endX} ${endY}`;
+      } else if (progress !== 0) {
+        if (progress >= 50) {
+          // highlightPath.arcTo(cX, cY, radius);
+          highlightPath += `A${radius} ${radius} 0 0 1 ${cX} ${cY}`;
+        }
+        const angle = 180 + 180 * progress / 100;
+        const x1 = x + radius * Math.cos(angle / 180.0 * Math.PI);
+        const y1 = y + radius * Math.sin(angle / 180.0 * Math.PI);
+        // highlightPath.arcTo(x1, y1, radius);
+        highlightPath += `A${radius} ${radius} 0 0 1 ${x1} ${y1}`;
+      }
+
+      return (
+        <Path
+          key="high"
+          // 半圆路径，从起点经过中间，再到终点
+          d={highlightPath}
+          stroke="rgba(255,255,255,0.8)"
+          strokeWidth={STROKE_WIDTH}
+          strokeLinecap="round"
+        />
+      );
+      // return (
+      //   <Shape
+      //     key="high"
+      //     d={highlightPath}
+      //     stroke="rgba(255,255,255,0.8)"
+      //     strokeWidth={STROKE_WIDTH}
+      //   />
+      // );
+    }
+
+    render() {
+      const {
+        x, y, radius, progress,
+      } = this.props;
+      return this.drawArc(x, y, radius, progress);
+    }
+}
