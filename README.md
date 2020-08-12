@@ -8,11 +8,16 @@ ReactNative进度组件：圆形、条形、刻度......，带动画。
 
 
 ## Usage
-圆形进度条
+圆形进度条 CircularProgress
+刻度进度条 Dial
 
-<img src="https://github.com/wufengyc/react-native-progress/blob/master/example/1.jpg" height=400 />
+<img src="https://github.com/wufengyc/react-native-progress/blob/master/example/1.jpg" height=400 /><img src="https://github.com/wufengyc/react-native-progress/blob/master/example/2.jpg" height=400 />
+
 ```javascript
-import { CircularProgress } from 'react-native-wf-progress';
+import {
+  CircularProgress,
+  Dial
+} from 'react-native-wf-progress';
 
 <CircularProgress
   width={200}
@@ -25,13 +30,6 @@ import { CircularProgress } from 'react-native-wf-progress';
   fill="#FFFFFF">
   <View />
 </CircularProgress>
-```
-
-刻度进度条
-
-<img src="https://github.com/wufengyc/react-native-progress/blob/master/example/2.jpg" height=400 />
-```javascript
-import { Dial } from 'react-native-wf-progress';
 
 <Dial
   style={styles.dial}
