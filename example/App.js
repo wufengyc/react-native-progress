@@ -16,7 +16,7 @@ import {
 import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
-import { CircularProgress } from '../';
+import { CircularProgress } from 'react-native-wf-progress';
 
 const App: () => React$Node = () => {
   return (

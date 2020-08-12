@@ -11,6 +11,12 @@
     "react": "16.0.0",
     "react-native-svg": ">=6.0.0"
   },
+  "files": [
+    "package.json",
+    "README.md",
+    "index.js",
+    "src"
+  ],
   "keywords": [
     "react-native",
     "react-native-progress",
