@@ -3,6 +3,7 @@ import React, { PureComponent } from 'react';
 import { Path } from 'react-native-svg';
 import {
   STROKE_WIDTH,
+  STROKE_FOREGROUND,
 } from './constant';
 
 
@@ -60,7 +61,7 @@ export default class ArcPath extends PureComponent {
           key="high"
           // 半圆路径，从起点经过中间，再到终点
           d={highlightPath}
-          stroke={stroke || "rgba(255,255,255,0.8)"}
+          stroke={stroke || STROKE_FOREGROUND}
           strokeWidth={STROKE_WIDTH}
           strokeLinecap="round"
         />

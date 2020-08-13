@@ -2,7 +2,12 @@ import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { Path } from 'react-native-svg';
 import {
-  SCALE_LONG_WIDTH, SCALE_SHORT_WIDTH, SCALE_MARGIN, STROKE_WIDTH, SCALE_COUNT,
+  SCALE_LONG_WIDTH,
+  SCALE_SHORT_WIDTH,
+  SCALE_MARGIN,
+  STROKE_WIDTH,
+  SCALE_COUNT,
+  STROKE_FOREGROUND,
 } from './constant';
 
 export default class Scale extends PureComponent {
@@ -84,7 +89,7 @@ export default class Scale extends PureComponent {
           <Path
             key={i}
             d={`M${bX} ${bY} L${sX} ${sY}`}
-            stroke={stroke || "rgba(255,255,255,0.8)"}
+            stroke={stroke || STROKE_FOREGROUND}
             strokeWidth={strokeWidth}
             strokeLinecap="round"
           />

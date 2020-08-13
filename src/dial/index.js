@@ -12,7 +12,12 @@ import Svg, {
 import Scale from './Scale';
 import ArcPath from './ArcPath';
 import {
-  SCALE_LONG_WIDTH, SCALE_SHORT_WIDTH, SCALE_MARGIN, STROKE_WIDTH, SCALE_COUNT,
+  SCALE_LONG_WIDTH,
+  SCALE_SHORT_WIDTH,
+  SCALE_MARGIN,
+  STROKE_WIDTH,
+  SCALE_COUNT,
+  STROKE_BACKGROUND,
 } from './constant';
 
 const AnimatedScale = Animated.createAnimatedComponent(Scale);
@@ -88,7 +93,7 @@ export default class Dial extends PureComponent {
           key="an"
           // 半圆路径，从起点经过中间，再到终点
           d={`M${startX} ${startY} A${radius} ${radius} 0 0 1 ${cX} ${cY} A${radius} ${radius} 0 0 1 ${endX} ${endY}`}
-          stroke={color}
+          stroke={color || STROKE_BACKGROUND}
           strokeWidth={STROKE_WIDTH}
           strokeLinecap="round"
         />
@@ -144,7 +149,7 @@ export default class Dial extends PureComponent {
           <Path
             key={i}
             d={`M${bX} ${bY} L${sX} ${sY}`}
-            stroke={color}
+            stroke={color || STROKE_BACKGROUND}
             strokeWidth={strokeWidth}
             strokeLinecap="round"
           />
@@ -163,7 +168,7 @@ export default class Dial extends PureComponent {
       const y = height - 30;
 
       // 进度条颜色
-      let bgStrokeColor = 'rgba(255,255,255,0.3)';
+      let bgStrokeColor;
       if (strokeColor && strokeColor.background) {
         bgStrokeColor = strokeColor.background;
       }
