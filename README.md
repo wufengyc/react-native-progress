@@ -118,7 +118,6 @@ import {
 </table>
 
 ## Props Dial
-目前Dial暂不支持更多的属性，比如进度条颜色，后面会加上。
 <table>
   <tr>
     <th>props</th>
