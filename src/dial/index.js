@@ -168,9 +168,11 @@ export default class Dial extends PureComponent {
       const y = height - 30;
 
       // 进度条颜色
-      let bgStrokeColor;
-      if (strokeColor && strokeColor.background) {
-        bgStrokeColor = strokeColor.background;
+      let bgStroke;
+      let fgStroke;
+      if (strokeColor) {
+        bgStroke = strokeColor.background;
+        fgStroke = strokeColor.foreground;
       }
 
       return (
@@ -179,8 +181,8 @@ export default class Dial extends PureComponent {
           height={height}
           style={[styles.surface, style]}
         >
-          {this.drawArc(x, y, radius, bgStrokeColor)}
-          {this.drawScale(x, y, radius, bgStrokeColor)}
+          {this.drawArc(x, y, radius, bgStroke)}
+          {this.drawScale(x, y, radius, bgStroke)}
           <AnimatedArcPath
             x={x}
             y={y}
@@ -189,7 +191,7 @@ export default class Dial extends PureComponent {
               inputRange: [0, 100],
               outputRange: [0, 100],
             })}
-            stroke={strokeColor ? strokeColor.foreground : undefined}
+            stroke={fgStroke}
           />
           <AnimatedScale
             x={x}
@@ -199,7 +201,7 @@ export default class Dial extends PureComponent {
               inputRange: [0, 100],
               outputRange: [0, 100],
             })}
-            stroke={strokeColor ? strokeColor.foreground : undefined}
+            stroke={fgStroke}
           />
         </Svg>
       );
