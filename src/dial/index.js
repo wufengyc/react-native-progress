@@ -26,6 +26,10 @@ export default class Dial extends PureComponent {
       style: ViewPropTypes.style,
       progress: PropTypes.number,
       width: PropTypes.number,
+      strokeColor: PropTypes.shape({ // 颜色，背景色、前景色
+        background: PropTypes.string,
+        foreground: PropTypes.string,
+    }),
     };
 
     constructor(props) {
@@ -66,11 +70,12 @@ export default class Dial extends PureComponent {
 
     /**
      * 画圆形进度
-     * @param {*} x 圆心x轴坐标
-     * @param {*} y 圆心y轴坐标
-     * @param {*} radius 半径
+     * @param {number} x      圆心x轴坐标
+     * @param {number} y      圆心y轴坐标
+     * @param {number} radius 半径
+     * @param {string} color  颜色
      */
-    drawArc(x, y, radius) {
+    drawArc(x, y, radius, color) {
       // （求半圆起点的坐标和终点的坐标）已知圆心，半径，角度，求圆上的点坐标
       const startX = x + radius * Math.cos(170 / 180.0 * Math.PI);
       const startY = y + radius * Math.sin(170 / 180.0 * Math.PI);
@@ -83,7 +88,7 @@ export default class Dial extends PureComponent {
           key="an"
           // 半圆路径，从起点经过中间，再到终点
           d={`M${startX} ${startY} A${radius} ${radius} 0 0 1 ${cX} ${cY} A${radius} ${radius} 0 0 1 ${endX} ${endY}`}
-          stroke="rgba(255,255,255,0.3)"
+          stroke={color}
           strokeWidth={STROKE_WIDTH}
           strokeLinecap="round"
         />
@@ -92,18 +97,18 @@ export default class Dial extends PureComponent {
 
     /**
      * 画刻度线
-     * @param {*} x 圆心x轴坐标
-     * @param {*} y 圆心y轴坐标
-     * @param {*} radius 进度圆的半径
-     * @param {*} progress 进度
+     * @param {number} x      圆心x轴坐标
+     * @param {number} y      圆心y轴坐标
+     * @param {number} radius 进度圆的半径
+     * @param {string} color  颜色
      */
-    drawScale(x, y, radius) {
+    drawScale(x, y, radius, color) {
       /**
-         * 画这些刻度需要有两个虚拟的圆，
-         * 1.外面的大圆为刻度外点连成的圆
-         * 2.里面的小圆为刻度内点连成的圆
-         * 外圆跟圆心连成的线中，外圆与内圆那一段就是刻度，所以需要计算外圆和内圆上的点并画成线
-         */
+       * 画这些刻度需要有两个虚拟的圆，
+       * 1.外面的大圆为刻度外点连成的圆
+       * 2.里面的小圆为刻度内点连成的圆
+       * 外圆跟圆心连成的线中，外圆与内圆那一段就是刻度，所以需要计算外圆和内圆上的点并画成线
+       */
 
       // 外圆（大）的半径，内（小）圆的半径
       const bbRadius = radius + STROKE_WIDTH + SCALE_MARGIN + SCALE_LONG_WIDTH; // 更大的圆（长刻度线）的半径
@@ -139,7 +144,7 @@ export default class Dial extends PureComponent {
           <Path
             key={i}
             d={`M${bX} ${bY} L${sX} ${sY}`}
-            stroke="rgba(255,255,255,0.3)"
+            stroke={color}
             strokeWidth={strokeWidth}
             strokeLinecap="round"
           />
@@ -150,12 +155,18 @@ export default class Dial extends PureComponent {
     }
 
     render() {
-      const { width, style } = this.props;
+      const { width, style, strokeColor } = this.props;
       const { radius, anim } = this.state;
       const height = radius + 60;
       // 圆心坐标
       const x = width / 2;
       const y = height - 30;
+
+      // 进度条颜色
+      let bgStrokeColor = 'rgba(255,255,255,0.3)';
+      if (strokeColor && strokeColor.background) {
+        bgStrokeColor = strokeColor.background;
+      }
 
       return (
         <Svg
@@ -163,8 +174,8 @@ export default class Dial extends PureComponent {
           height={height}
           style={[styles.surface, style]}
         >
-          {this.drawArc(x, y, radius)}
-          {this.drawScale(x, y, radius)}
+          {this.drawArc(x, y, radius, bgStrokeColor)}
+          {this.drawScale(x, y, radius, bgStrokeColor)}
           <AnimatedArcPath
             x={x}
             y={y}
@@ -173,6 +184,7 @@ export default class Dial extends PureComponent {
               inputRange: [0, 100],
               outputRange: [0, 100],
             })}
+            stroke={strokeColor ? strokeColor.foreground : undefined}
           />
           <AnimatedScale
             x={x}
@@ -182,6 +194,7 @@ export default class Dial extends PureComponent {
               inputRange: [0, 100],
               outputRange: [0, 100],
             })}
+            stroke={strokeColor ? strokeColor.foreground : undefined}
           />
         </Svg>
       );

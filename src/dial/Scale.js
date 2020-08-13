@@ -11,6 +11,7 @@ export default class Scale extends PureComponent {
       x: PropTypes.number,
       y: PropTypes.number,
       radius: PropTypes.number,
+      stroke: PropTypes.string,
     };
 
     constructor(props) {
@@ -23,20 +24,21 @@ export default class Scale extends PureComponent {
 
     }
 
-    /**
-     * 画刻度线
-     * @param {*} x 圆心x轴坐标
-     * @param {*} y 圆心y轴坐标
-     * @param {*} radius 进度圆的半径
-     * @param {*} progress 进度
-     */
-    drawScale(x, y, radius, progress) {
+    drawScale() {
       /**
        * 画这些刻度需要有两个虚拟的圆，
        * 1.外面的大圆为刻度外点连成的圆
        * 2.里面的小圆为刻度内点连成的圆
        * 外圆跟圆心连成的线中，外圆与内圆那一段就是刻度，所以需要计算外圆和内圆上的点并画成线
        */
+
+      const {
+        x,
+        y,
+        radius,
+        progress,
+        stroke,
+      } = this.props;
 
       // 根据进度计算出高亮的刻度的个数
       let highlightCount = 3;
@@ -82,7 +84,7 @@ export default class Scale extends PureComponent {
           <Path
             key={i}
             d={`M${bX} ${bY} L${sX} ${sY}`}
-            stroke="rgba(255,255,255,0.8)"
+            stroke={stroke || "rgba(255,255,255,0.8)"}
             strokeWidth={strokeWidth}
             strokeLinecap="round"
           />
@@ -93,9 +95,6 @@ export default class Scale extends PureComponent {
     }
 
     render() {
-      const {
-        x, y, radius, progress,
-      } = this.props;
-      return this.drawScale(x, y, radius, progress);
+      return this.drawScale();
     }
 }

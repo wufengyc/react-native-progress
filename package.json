@@ -1,14 +1,14 @@
 {
   "name": "react-native-wf-progress",
-  "version": "1.1.0",
-  "description": "ReactNative进度条组件，圆形、条形......",
+  "version": "1.1.2",
+  "description": "带动画ReactNative进度条组件，圆形、条形、刻度......",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "peerDependencies": {
     "react-native": ">=0.40.0",
-    "react": "16.0.0",
+    "react": ">=15.0.0",
     "react-native-svg": ">=6.0.0"
   },
   "files": [

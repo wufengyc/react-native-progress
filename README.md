@@ -4,6 +4,9 @@ ReactNative进度组件：圆形、条形、刻度......，带动画。
 
 ## Getting started
 
+使用该组件前，你需要先安装 react-native-svg
+`$ npm install react-native-svg --save`
+
 `$ npm install react-native-wf-progress --save`
 
 
@@ -136,5 +139,17 @@ import {
     <td>进度</td>
     <td>number，0-100范围</td>
     <td>非必须</td>
+  </tr>
+  <tr>
+    <td>strokeColor</td>
+    <td>进度条颜色</td>
+    <td>{<br/>
+      &emsp;background: string,<br/>
+      &emsp;foreground: string<br/>
+      }
+    </td>
+    <td>非必须。
+      背景进度条默认'rgba(255,255,255,0.3)'，
+      前景默认'rgba(255,255,255,0.8)'</td>
   </tr>
 </table>
