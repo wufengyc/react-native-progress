@@ -38,7 +38,7 @@ import {
   style={styles.dial}
   width={300}
   progress={70}
-	strokeColor={{
+  strokeColor={{
     background: 'rgba(255, 0, 0, 0.3)',
     foreground: 'rgba(255, 0, 0, 0.8)',
   }}
